@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int board[9], p1move, p2move, turn, i, line;
+int board[9] = {0}, p1move, p2move, turn = 1, i, line;
 bool gameEnded = false, turnEnded = false;
 
 string p1[7];
@@ -14,42 +14,14 @@ int checkWL() {
 	
 	// P1 WINS
 	
-	if (board[0] == 1 && board[1] == 1 && board[2] == 1) {
-		
-		gameEnded = true;
-		cout << "P1 wins!" << endl;
-	}
-	else if (board[3] == 1 && board[4] == 1 && board[5] == 1) {
-		
-		gameEnded = true;
-		cout << "P1 wins!" << endl;
-	}
-	else if (board[6] == 1 && board[7] == 1 && board[8] == 1) {
-		
-		gameEnded = true;
-		cout << "P1 wins!" << endl;
-	}
-	else if (board[0] == 1 && board[3] == 1 && board[6] == 1) {
-		
-		gameEnded = true;
-		cout << "P1 wins!" << endl;
-	}
-	else if (board[1] == 1 && board[4] == 1 && board[7] == 1) {
-		
-		gameEnded = true;
-		cout << "P1 wins!" << endl;
-	}
-	else if (board[2] == 1 && board[5] == 1 && board[8] == 1) {
-		
-		gameEnded = true;
-		cout << "P1 wins!" << endl;
-	}
-	else if (board[0] == 1 && board[4] == 1 && board[8] == 1) {
-		
-		gameEnded = true;
-		cout << "P1 wins!" << endl;
-	}
-	else if (board[2] == 1 && board[4] == 1 && board[6] == 1) {
+	if (board[0] == 1 && board[1] == 1 && board[2] == 1 ||
+		board[3] == 1 && board[4] == 1 && board[5] == 1 ||
+		board[6] == 1 && board[7] == 1 && board[8] == 1 ||
+		board[0] == 1 && board[3] == 1 && board[6] == 1 ||
+		board[1] == 1 && board[4] == 1 && board[7] == 1 ||
+		board[2] == 1 && board[5] == 1 && board[8] == 1 ||
+		board[0] == 1 && board[4] == 1 && board[8] == 1 ||
+		board[2] == 1 && board[4] == 1 && board[6] == 1) {
 		
 		gameEnded = true;
 		cout << "P1 wins!" << endl;
@@ -57,42 +29,14 @@ int checkWL() {
 	
 	// P2 WINS
 
-	else if (board[0] == 2 && board[1] == 2 && board[2] == 2) {
-		
-		gameEnded = true;
-		cout << "P2 wins!" << endl;
-	}
-	else if (board[3] == 2 && board[4] == 2 && board[5] == 2) {
-		
-		gameEnded = true;
-		cout << "P2 wins!" << endl;
-	}
-	else if (board[6] == 2 && board[7] == 2 && board[8] == 2) {
-		
-		gameEnded = true;
-		cout << "P2 wins!" << endl;
-	}
-	else if (board[0] == 2 && board[3] == 2 && board[6] == 2) {
-		
-		gameEnded = true;
-		cout << "P2 wins!" << endl;
-	}
-	else if (board[1] == 2 && board[4] == 2 && board[7] == 2) {
-		
-		gameEnded = true;
-		cout << "P2 wins!" << endl;
-	}
-	else if (board[2] == 2 && board[5] == 2 && board[8] == 2) {
-		
-		gameEnded = true;
-		cout << "P2 wins!" << endl;
-	}
-	else if (board[0] == 2 && board[4] == 2 && board[8] == 2) {
-		
-		gameEnded = true;
-		cout << "P2 wins!" << endl;
-	}
-	else if (board[2] == 2 && board[4] == 2 && board[6] == 2) {
+	if (board[0] == 2 && board[1] == 2 && board[2] == 2 ||
+		board[3] == 2 && board[4] == 2 && board[5] == 2 ||
+		board[6] == 2 && board[7] == 2 && board[8] == 2 ||
+		board[0] == 2 && board[3] == 2 && board[6] == 2 ||
+		board[1] == 2 && board[4] == 2 && board[7] == 2 ||
+		board[2] == 2 && board[5] == 2 && board[8] == 2 ||
+		board[0] == 2 && board[4] == 2 && board[8] == 2 ||
+		board[2] == 2 && board[4] == 2 && board[6] == 2) {
 		
 		gameEnded = true;
 		cout << "P2 wins!" << endl;
@@ -172,20 +116,22 @@ int writeBoard() {
 	cout << "=======================\n";
 	
 	for (line = 0; line < 7; line++) {
-	
+
 		for (i = 6; i < 9; i++) {
 				
-			if (board[i] == 0) {
-				
-				cout << empty[line];	
-			}
-			else if (board[i] == 1) {
-				
-				cout << p1[line];
-			}
-			else if (board[i] == 2) {
-				
-				cout << p2[line];
+			switch (board[i]) {
+
+				case 0:
+					cout << empty[line];
+				break;
+
+				case 1:
+					cout << p1[line];
+				break;
+
+				case 2:
+					cout << p2[line];
+				break;
 			}
 			
 			if (i != 8) {
@@ -224,13 +170,6 @@ int main () {
 	empty[4] = "       ";
 	empty[5] = "       ";
 	empty[6] = "       ";
-	
-	for (i = 0; i < 9; i++) {
-	
-		board[i] = 0;
-	}
-	
-	turn = 1;
 	
 	while (gameEnded == false) {
 		
